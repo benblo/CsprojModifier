@@ -21,6 +21,7 @@ namespace CsprojModifier.Editor.Features
 
             if (GUILayout.Button("Regenerate project files"))
             {
+                Debug.Log(CodeEditor.CurrentEditor);
                 if (CodeEditor.CurrentEditor.GetType().Name == "DefaultExternalCodeEditor")
                 {
                     // SyncVS.Synchronizer.Sync(); (SyncVS is an internal class, so call it with Reflection)
