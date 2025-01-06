@@ -1,1 +1,1 @@
-{"AdditionalImports":[],"AdditionalImportsAdditionalProjects":[],"EnableAddAnalyzerReferences":true,"AddAnalyzerReferencesAdditionalProjects":[]}
+{"AdditionalImports":[{"Path":"Assets/code/Scratch.Runtime/LangVersion.props","Position":0}],"AdditionalImportsAdditionalProjects":["Scratch.Runtime.csproj"],"EnableAddAnalyzerReferences":true,"AddAnalyzerReferencesAdditionalProjects":[]}
