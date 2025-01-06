@@ -21,6 +21,7 @@ namespace CsprojModifier.Editor.Features
         public override void Initialize()
         {
             var settings = CsprojModifierSettings.Instance;
+            var projectPath = PathEx.projectPath;
             _reorderableListAdditionalImports = new ReorderableList(settings.AdditionalImports, typeof(ImportProjectItem), draggable: true, displayHeader: false, displayAddButton: true, displayRemoveButton: true)
             {
                 drawElementCallback = ((rect, index, active, focused) =>
@@ -45,12 +46,12 @@ namespace CsprojModifier.Editor.Features
                         {
                             var selectedFilePath = EditorUtility.OpenFilePanelWithFilters(
                                 "Add Additional Project",
-                                Path.GetDirectoryName(Application.dataPath),
+                                projectPath,
                                 new[] { "MSBuild Project File (*.props;*.target)", "props,target", "All files", "*" }
                             );
                             if (!string.IsNullOrWhiteSpace(selectedFilePath))
                             {
-                                selectedItem.Path = PathEx.MakeRelative(Application.dataPath, selectedFilePath);
+                                selectedItem.Path = PathEx.MakeRelative(projectPath, selectedFilePath);
                             }
                         }
 
@@ -96,12 +97,12 @@ namespace CsprojModifier.Editor.Features
                         {
                             var selectedFilePath = EditorUtility.OpenFilePanelWithFilters(
                                 "Add Additional Project",
-                                Path.GetDirectoryName(Application.dataPath),
+                                projectPath,
                                 new[] { "C# Project File (*.csproj)", "csproj", "All files", "*" }
                             );
                             if (!string.IsNullOrWhiteSpace(selectedFilePath))
                             {
-                                selectedItem = ValueTuple.Create(PathEx.MakeRelative(Application.dataPath, selectedFilePath));
+                                selectedItem = ValueTuple.Create(PathEx.MakeRelative(projectPath, selectedFilePath));
                                 GUI.changed = true;
                             }
                         }

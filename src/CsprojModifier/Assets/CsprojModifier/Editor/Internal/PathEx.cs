@@ -10,10 +10,12 @@ namespace CsprojModifier.Editor.Internal
 {
     internal static class PathEx
     {
+        public static string projectPath => Path.GetDirectoryName(Application.dataPath);
+
         public static string GetFullPath(string path)
         {
             if (Path.IsPathRooted(path)) return path;
-            return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Application.dataPath), path));
+            return Path.GetFullPath(Path.Combine(projectPath, path));
         }
 
         public static bool Equals(string pathA, string pathB)

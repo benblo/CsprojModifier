@@ -21,6 +21,7 @@ namespace CsprojModifier.Editor.Features
             var settings = CsprojModifierSettings.Instance;
             // WORKAROUND: https://issuetracker.unity3d.com/issues/missingmethodexception-when-adding-elements-to-reorderablelist-with-string-type
             var addAnalyzerReferencesAdditionalProjects = new List<ValueTuple<string>>(settings.AddAnalyzerReferencesAdditionalProjects.Select(x => ValueTuple.Create(x)));
+            var projectPath = PathEx.projectPath;
             _reorderableListAdditionalAddAnalyzerProjects = new ReorderableList(addAnalyzerReferencesAdditionalProjects, typeof(ValueTuple<string>), draggable: true, displayHeader: false, displayAddButton: true, displayRemoveButton: true)
             {
                 drawNoneElementCallback = rect => EditorGUI.LabelField(rect, "Assembly-CSharp.csproj and Assembly-CSharp-Editor.csproj are always targeted."),
@@ -45,12 +46,12 @@ namespace CsprojModifier.Editor.Features
                         {
                             var selectedFilePath = EditorUtility.OpenFilePanelWithFilters(
                                 "Add Additional Project",
-                                Path.GetDirectoryName(Application.dataPath),
+                                projectPath,
                                 new[] { "C# Project File (*.csproj)", "csproj", "All files", "*" }
                             );
                             if (!string.IsNullOrWhiteSpace(selectedFilePath))
                             {
-                                selectedItem = ValueTuple.Create(PathEx.MakeRelative(Application.dataPath, selectedFilePath));
+                                selectedItem = ValueTuple.Create(PathEx.MakeRelative(projectPath, selectedFilePath));
                                 GUI.changed = true;
                             }
                         }
